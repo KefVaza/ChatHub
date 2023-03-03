@@ -5,7 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.red45.chathub.databinding.ActivityFirstBinding
 
-class First : AppCompatActivity() {
+class FirstActivity : AppCompatActivity() {
 
     lateinit var binding: ActivityFirstBinding
 
@@ -15,10 +15,10 @@ class First : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.loginBtn.setOnClickListener {
-            startActivity(Intent(this, Login::class.java))
+            startActivity(Intent(this, LoginActivity::class.java))
         }
         binding.registerBtn.setOnClickListener {
-            startActivity(Intent(this, Register::class.java))
+            startActivity(Intent(this, RegisterActivity::class.java))
         }
 
 
