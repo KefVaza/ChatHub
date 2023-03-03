@@ -11,4 +11,6 @@
     <string name="search">Search</string>
     <string name="bot_message">Bot Message</string>
     <string name="user_message">User Message</string>
+    <string name="verify_email">Verify Email</string>
+    <string name="submit">Submit</string>
 </resources>

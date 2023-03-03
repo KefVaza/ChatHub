@@ -55,6 +55,21 @@
             android:layout_marginEnd="25dp"
             android:layout_marginTop="15dp"/>
 
+        <TextView
+            android:id="@+id/tvVerifyEmail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:text="@string/verify_email"
+            android:textColor="#0000ff"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="25dp"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:clickable="true"
+            android:focusable="true"
+            tools:ignore="RtlHardcoded" />
+
         <EditText
             android:id="@+id/etRegPass"
             android:layout_width="match_parent"
