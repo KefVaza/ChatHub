@@ -20,5 +20,7 @@ class First : AppCompatActivity() {
         binding.registerBtn.setOnClickListener {
             startActivity(Intent(this, Register::class.java))
         }
+
+
     }
 }
