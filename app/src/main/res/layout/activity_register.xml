@@ -8,14 +8,26 @@
     android:orientation="vertical"
     android:background="#080808">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="25sp"
-        android:text="add profile picture here"
-        android:textColor="@color/white"
-        android:gravity="center"
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/ciPickProImg"
+        android:layout_width="125dp"
+        android:layout_height="125dp"
+        android:src="@drawable/profile_icon"
+        app:civ_border_width="2dp"
+        app:civ_border_color="@color/white"
+        android:layout_gravity="center"
         android:layout_marginTop="100dp"/>
+
+    <ImageButton
+        android:id="@+id/selectImgBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/plus_icon"
+        android:backgroundTint="@color/white"
+        android:onClick="selectImage"
+        tools:ignore="UsingOnClickInXml"
+        android:layout_gravity="center"/>
 
     <LinearLayout
         android:layout_width="match_parent"
