@@ -1,5 +1,6 @@
 package com.red45.chathub
 
+import android.app.ProgressDialog
 import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
@@ -8,15 +9,22 @@ import android.provider.MediaStore
 import android.util.Patterns
 import android.util.Patterns.EMAIL_ADDRESS
 import android.view.View
+import android.widget.Toast
 import androidx.core.util.PatternsCompat.EMAIL_ADDRESS
 import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.UserProfileChangeRequest
+import com.google.firebase.auth.ktx.userProfileChangeRequest
+import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.auth.User
+import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import com.red45.chathub.databinding.ActivityRegisterBinding
 import java.io.IOException
+import java.util.*
 import java.util.regex.Pattern
 
 class RegisterActivity : AppCompatActivity() {
@@ -24,9 +32,9 @@ class RegisterActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityRegisterBinding
     private lateinit var auth: FirebaseAuth
-    private lateinit var database: FirebaseDatabase
-    private lateinit var storage: FirebaseStorage
     private lateinit var storageRef: StorageReference
+    private lateinit var storage: FirebaseStorage
+    private lateinit var db: FirebaseFirestore
 
     private var proImgUri: Uri? = null
     private val PICK_IMAGE_REQUEST = 1
@@ -37,9 +45,8 @@ class RegisterActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         auth = FirebaseAuth.getInstance()
-        database = FirebaseDatabase.getInstance()
         storage = FirebaseStorage.getInstance()
-        storageRef = storage.reference
+        db = FirebaseFirestore.getInstance()
 
         setContentView(binding.root)
 
@@ -77,7 +84,44 @@ class RegisterActivity : AppCompatActivity() {
                 binding.etRegPass.requestFocus()
                 return@setOnClickListener
             }
-            //registerUser()
+
+            val proDialog = ProgressDialog(this)
+            proDialog.setMessage("Registering user...")
+            proDialog.show()
+
+            auth.createUserWithEmailAndPassword(email,pass)
+                .addOnCompleteListener(this){
+                    task ->
+                    if (task.isSuccessful){
+                        val user = auth.currentUser
+
+                        if (proImgUri != null){
+                            //uploadImgToStorage(user!!.uid)
+                        }
+                        user!!.sendEmailVerification()
+                            .addOnCompleteListener{
+                                vTask ->
+                                if (vTask.isSuccessful){
+                                    startActivity(Intent(this,EmailVerifyActivity::class.java))
+                                    finish()
+                                }
+                            }
+                        val proUpdate = userProfileChangeRequest {
+                            displayName = name
+                        }
+                        user.updateProfile(proUpdate)
+                            .addOnCompleteListener{
+                                uTask->
+                                if (uTask.isSuccessful){
+                                    proDialog.dismiss()
+                                    finish()
+                                }
+                            }
+                    }else{
+                        proDialog.dismiss()
+                        Toast.makeText(this, "Registration failed. ${task.exception?.message}", Toast.LENGTH_SHORT).show()
+                    }
+                }
         }
     }
     private fun  selectImg(){
@@ -99,4 +143,16 @@ class RegisterActivity : AppCompatActivity() {
             }
         }
     }
+   // private fun uploadImgToStorage(userId: String){
+       // val proImgRef = storageRef.child("profile_images/$userId.jpg")
+
+       // proImgRef.putFile(proImgUri!!)
+            //.addOnSuccessListener {
+///
+           // }
+           // .addOnFailureListener{
+           //     Toast.makeText(this, "Failed to upload profile image", Toast.LENGTH_SHORT).show()
+          //  }
+//}
 }
+

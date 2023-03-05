@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LoginActivity"
+    tools:context=".ForgotPassActivity"
     android:orientation="vertical"
     android:background="#080808">
 
@@ -24,11 +24,10 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginTop="25dp">
+        android:orientation="vertical">
 
         <EditText
-            android:id="@+id/etLogEmail"
+            android:id="@+id/etEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#30ffffff"
@@ -41,45 +40,14 @@
             android:inputType="textEmailAddress"
             android:layout_marginStart="25dp"
             android:layout_marginEnd="25dp"
-            android:layout_marginTop="15dp"/>
-
-        <EditText
-            android:id="@+id/etLogPass"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#30ffffff"
-            android:hint="@string/password"
-            android:textColor="@color/white"
-            android:textColorHint="@color/white"
-            android:padding="13dp"
-            android:drawableStart="@drawable/pass_icon"
-            android:drawablePadding="13dp"
-            android:inputType="textPassword"
-            android:layout_marginStart="25dp"
-            android:layout_marginEnd="25dp"
-            android:layout_marginTop="15dp"/>
-
-        <TextView
-            android:id="@+id/tvForgotPass"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="#4169e1"
-            android:text="@string/forgot_pass"
-            android:layout_marginStart="5dp"
-            android:textStyle="bold"
-            android:focusable="true"
-            android:clickable="true"
-            android:textSize="16sp"
-            android:layout_gravity="right"
-            android:layout_marginEnd="25dp"
-            tools:ignore="RtlHardcoded" />
+            android:layout_marginTop="25dp"/>
 
         <Button
-            android:id="@+id/logBtn"
+            android:id="@+id/subBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/white"
-            android:text="@string/login"
+            android:text="@string/submit"
             android:textColor="#080808"
             android:textStyle="bold"
             android:textSize="16sp"
@@ -89,5 +57,7 @@
             android:layout_marginTop="20dp"/>
 
     </LinearLayout>
+
+
 
 </LinearLayout>

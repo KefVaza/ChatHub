@@ -11,6 +11,14 @@
     <string name="search">Search</string>
     <string name="bot_message">Bot Message</string>
     <string name="user_message">User Message</string>
-    <string name="verify_email">Verify Email</string>
+    <string name="resend">Resend</string>
+    <string name="forgot_pass">Forgot Password</string>
+    <string name="already_account">Already have a account?</string>
+    <string name="dont_hav_account">Dont have a account?</string>
+    <string name="login_here">Login here.</string>
+    <string name="register_here">Register here.</string>
+    <string name="check_mail">Check Your Email</string>
     <string name="submit">Submit</string>
+    <string name="please_check_mail">Please check the email address \n for instructions to verify your E-mail</string>
+    <string name="please_check_mail_pass">Please check the email address \n for instructions to reset Password</string>
 </resources>
