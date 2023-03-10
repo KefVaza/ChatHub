@@ -8,26 +8,19 @@
     android:orientation="vertical"
     android:background="#080808">
 
-
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/ciPickProImg"
-        android:layout_width="125dp"
-        android:layout_height="125dp"
-        android:src="@drawable/profile_icon"
-        app:civ_border_width="2dp"
-        app:civ_border_color="@color/white"
+    <LinearLayout
+        android:layout_width="190dp"
+        android:layout_height="109dp"
         android:layout_gravity="center"
-        android:layout_marginTop="75dp" />
+        android:layout_marginTop="100dp">
 
-    <ImageButton
-        android:id="@+id/selectImgBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/plus_icon"
-        android:backgroundTint="@color/white"
-        android:onClick="selectImage"
-        tools:ignore="UsingOnClickInXml"
-        android:layout_gravity="center"/>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/chat_hub_logo" />
+
+    </LinearLayout>
+
 
     <LinearLayout
         android:layout_width="match_parent"

@@ -7,36 +7,39 @@
     tools:context=".MainActivity">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvMessages"
+        android:id="@+id/rvMsg"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/tiSearch"/>
+        android:layout_above="@id/tiSearch"/>
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/tiSearch"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_margin="5dp"
-            android:padding="5dp"
-            android:textColorHint="@color/white"
-            app:hintTextColor="@color/white"
-            style="@style/TextInputLayoutStyle">
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tiSearch"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="5dp"
+        android:hint="@string/search"
+        android:padding="5dp"
+        android:textColorHint="@color/black"
+        app:hintTextColor="@color/black"
+        style="@style/TextInputLayoutStyle">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etSearch"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:drawableEnd="@drawable/send_icon"
+            android:drawableTint="#774df2"
             android:ems="10"
             android:imeOptions="actionSend"
             android:importantForAutofill="no"
             android:inputType="text"
-            android:textColor="@color/white"
-            android:textColorHint="@color/white"
-            android:textSize="14sp"
-            android:background="@color/black"/>
-        </com.google.android.material.textfield.TextInputLayout>
+            android:textColor="@color/black"
+            android:textColorHint="@color/black"
+            android:textSize="14sp"/>
+
+
+    </com.google.android.material.textfield.TextInputLayout>
 
 
 

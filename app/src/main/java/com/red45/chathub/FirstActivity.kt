@@ -7,7 +7,7 @@ import com.red45.chathub.databinding.ActivityFirstBinding
 
 class FirstActivity : AppCompatActivity() {
 
-    lateinit var binding: ActivityFirstBinding
+    private lateinit var binding: ActivityFirstBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

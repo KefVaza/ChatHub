@@ -8,7 +8,6 @@ import android.util.Patterns
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.red45.chathub.databinding.ActivityForgotPassBinding
-import com.red45.chathub.databinding.ActivityLoginBinding
 
 class ForgotPassActivity : AppCompatActivity() {
 

@@ -58,6 +58,12 @@ class LoginActivity : AppCompatActivity() {
                         }
                         else{
                             pro.dismiss()
+                            user?.sendEmailVerification()?.addOnCompleteListener {
+                                    task ->
+                                if (!task.isSuccessful){
+                                    Toast.makeText(this, "Failed to send Verification E-mail", Toast.LENGTH_SHORT).show()
+                                }
+                            }
                             Toast.makeText(this, "Please verify your E-mail", Toast.LENGTH_SHORT).show()
                             startActivity(Intent(this, EmailVerifyActivity::class.java))
                             auth.signOut()

@@ -7,7 +7,6 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.android.volley.Request.Method.POST
 import com.android.volley.RequestQueue
 import com.android.volley.Response
 import com.android.volley.RetryPolicy
@@ -15,94 +14,87 @@ import com.android.volley.VolleyError
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import com.google.android.material.textfield.TextInputEditText
-import com.red45.chathub.Classes.MessageRVAdapter
-import com.red45.chathub.Classes.MessageRVModel
+import com.red45.chathub.Classes.MessageRvAdapter
+import com.red45.chathub.Classes.MessageRvModel
 import org.json.JSONObject
-import java.lang.ref.ReferenceQueue
 
 class MainActivity : AppCompatActivity() {
 
-    lateinit var queryEdt : TextInputEditText
-    lateinit var msgRv : RecyclerView
-    lateinit var msgRVAdapter : MessageRVAdapter
-    lateinit var msgList : ArrayList<MessageRVModel>
-//    "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"
-    var url = "https://api.openai.com/v1/completions"
+    lateinit var searchEdit: TextInputEditText
+    lateinit var messageRv: RecyclerView
+    lateinit var messageRvAdapter: MessageRvAdapter
+    lateinit var messageList: ArrayList<MessageRvModel>
+    val url = "https://api.openai.com/v1/completions"
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        queryEdt= findViewById(R.id.tiSearch)
-        msgRv =findViewById(R.id.rvMessages)
-        msgList = ArrayList()
-        msgRVAdapter= MessageRVAdapter(msgList)
-
+        searchEdit = findViewById(R.id.etSearch)
+        messageRv = findViewById(R.id.rvMsg)
+        messageList = ArrayList()
+        messageRvAdapter = MessageRvAdapter(messageList)
         val layoutManager = LinearLayoutManager(applicationContext)
-        msgRv.adapter = msgRVAdapter
+        messageRv.layoutManager = layoutManager
+        messageRv.adapter = messageRvAdapter
 
-        queryEdt.setOnEditorActionListener(TextView.OnEditorActionListener { textview, i, keyEvent ->
-            if(i==EditorInfo.IME_ACTION_SEND){
-                if(queryEdt.text.toString().length > 0){
-                    msgList.add(MessageRVModel(queryEdt.text.toString(),"user"))
-                    msgRVAdapter.notifyDataSetChanged()
-                    getResponce(queryEdt.text.toString())
-                }else{
-                    Toast.makeText(this@MainActivity,"Pleas enter your query !",Toast.LENGTH_SHORT).show()
+        searchEdit.setOnEditorActionListener(TextView.OnEditorActionListener { textView, i, keyEvent ->
+            if (i == EditorInfo.IME_ACTION_SEND){
+                if (searchEdit.toString().length > 0){
+                    messageList.add(MessageRvModel(searchEdit.text.toString(), "user"))
+                    messageRvAdapter.notifyDataSetChanged()
+                    getResponce(searchEdit.text.toString())
+                }
+                else{
+                    searchEdit.error = "Please search here"
+                    searchEdit.requestFocus()
                 }
                 return@OnEditorActionListener true
-
             }
             false
         })
 
-
-
     }
+    private fun getResponce(search: String){
+        searchEdit.setText("")
+        val queue: RequestQueue = Volley.newRequestQueue(applicationContext)
+        val jsonObject: JSONObject? = JSONObject()
+        jsonObject?.put("model", "text-davinci-003")
+        jsonObject?.put("prompt", search)
+        jsonObject?.put("temperature", 0)
+        jsonObject?.put("max_tokens", 100)
+        jsonObject?.put("top_p", 1)
+        jsonObject?.put("frequency_penalty", 0.0)
+        jsonObject?.put("presence_penalty", 0.0)
 
-    private fun getResponce(query: String) {
-        queryEdt.setText("")
-        val queue : RequestQueue = Volley.newRequestQueue(applicationContext)
-        val jsonObject : JSONObject? = JSONObject()
-        jsonObject?.put("model","text-davinci-003")
-        jsonObject?.put("prompt",query)
-        jsonObject?.put("temperature",0)
-        jsonObject?.put("max_tokens",100)
-        jsonObject?.put("frequency_penalty",0.0)
-        jsonObject?.put("presence_penalty",0.0)
-        jsonObject?.put("prompt",query)
-        jsonObject?.put("prompt",query)
-
-        val postRequest : JsonObjectRequest = object : JsonObjectRequest(Method.POST,url,jsonObject,Response.Listener { response ->
-                val responceMsg : String =response.getJSONArray("choices").getJSONObject(0).getString("text")
-            msgList.add(MessageRVModel(responceMsg,"bot"))
-            msgRVAdapter.notifyDataSetChanged()
-
+        val postRQ: JsonObjectRequest = object: JsonObjectRequest(Method.POST, url, jsonObject, Response.Listener { response ->
+            val responseMsg: String = response.getJSONArray("choices").getJSONObject(0).getString("text")
+            messageList.add(MessageRvModel(responseMsg, "bot"))
+            messageRvAdapter.notifyDataSetChanged()
         }, Response.ErrorListener {
-            Toast.makeText(this@MainActivity,"Somthing Wentt Wrong !!!",Toast.LENGTH_SHORT).show()
+            Toast.makeText(this,"Failed to get response", Toast.LENGTH_SHORT).show()
         }){
-
             override fun getHeaders(): MutableMap<String, String> {
-                val params : MutableMap<String,String> = HashMap()
+                val params: MutableMap<String, String> = HashMap()
                 params["Content-Type"] = "application/json"
-                params["Authorization"] = "Bearer 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"
+                params["Authorization"] = "Bearer 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"
                 return params
             }
         }
-        postRequest.setRetryPolicy(object  : RetryPolicy{
+
+        postRQ.setRetryPolicy(object : RetryPolicy{
             override fun getCurrentTimeout(): Int {
-                return 5000
+                return 50000
             }
 
             override fun getCurrentRetryCount(): Int {
-                return 5000
+                return 50000
             }
 
             override fun retry(error: VolleyError?) {
 
             }
         })
-            queue.add(postRequest)
-
-
+        queue.add(postRQ)
     }
 }
