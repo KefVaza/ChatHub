@@ -25,31 +25,35 @@
 
         <activity
             android:name=".ForgotPassActivity"
+            android:parentActivityName=".LoginActivity"
             android:exported="false" >
             <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".LoginActivity"  />
         </activity>
         <activity
             android:name=".EmailVerifyActivity"
+            android:parentActivityName=".FirstActivity"
             android:exported="false" >
             <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".FirstActivity"/>
         </activity>
         <activity
             android:name=".LoginActivity"
+            android:parentActivityName=".FirstActivity"
             android:exported="false" >
             <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".FirstActivity" />
         </activity>
         <activity
             android:name=".RegisterActivity"
+            android:parentActivityName=".FirstActivity"
             android:exported="false" >
             <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".FirstActivity"  />
         </activity>
         <activity
             android:name=".FirstActivity"
@@ -71,6 +75,9 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
+
+
+
     </application>
 
 </manifest>

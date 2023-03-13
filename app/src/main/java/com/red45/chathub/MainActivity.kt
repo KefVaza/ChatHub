@@ -62,7 +62,7 @@ class MainActivity : AppCompatActivity() {
         jsonObject?.put("model", "text-davinci-003")
         jsonObject?.put("prompt", search)
         jsonObject?.put("temperature", 0)
-        jsonObject?.put("max_tokens", 100)
+        jsonObject?.put("max_tokens", 1000)
         jsonObject?.put("top_p", 1)
         jsonObject?.put("frequency_penalty", 0.0)
         jsonObject?.put("presence_penalty", 0.0)
@@ -77,7 +77,7 @@ class MainActivity : AppCompatActivity() {
             override fun getHeaders(): MutableMap<String, String> {
                 val params: MutableMap<String, String> = HashMap()
                 params["Content-Type"] = "application/json"
-                params["Authorization"] = "Bearer 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"
+                params["Authorization"] = "Bearer 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"
                 return params
             }
         }
