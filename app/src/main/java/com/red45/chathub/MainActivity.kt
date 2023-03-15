@@ -1,7 +1,9 @@
 package com.red45.chathub
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.MenuItem
 import android.view.inputmethod.EditorInfo
 import android.widget.TextView
 import android.widget.Toast
@@ -97,6 +99,18 @@ class MainActivity : AppCompatActivity() {
             }
         })
         queue.add(postRQ)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId){
+            R.id.myAccount_menu -> {
+                startActivity(Intent(this@MainActivity,ProfileActivity::class.java))
+                true
+            }else
+                -> super.onOptionsItemSelected(item)
+        }
+
+
     }
 
 }

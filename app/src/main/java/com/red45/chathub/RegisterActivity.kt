@@ -103,6 +103,9 @@ class RegisterActivity : AppCompatActivity() {
                    }
                }
         }
+        if(auth.currentUser?.uid != null){
+            startActivity(Intent(this@RegisterActivity,MainActivity::class.java))
+        }
     }
 }
 

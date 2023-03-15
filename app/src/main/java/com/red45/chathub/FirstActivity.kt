@@ -15,8 +15,8 @@ class FirstActivity : AppCompatActivity() {
         binding = ActivityFirstBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val user = FirebaseAuth.getInstance().currentUser
-        if(user!=null) {
+        val user = FirebaseAuth.getInstance().currentUser?.uid
+        if(user !=null) {
             finish()
             startActivity(Intent(this, MainActivity::class.java))
         }
@@ -28,4 +28,5 @@ class FirstActivity : AppCompatActivity() {
             startActivity(Intent(this, RegisterActivity::class.java))
         }
     }
+
 }
