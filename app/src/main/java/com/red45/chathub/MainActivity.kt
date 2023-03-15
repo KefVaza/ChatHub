@@ -38,6 +38,7 @@ class MainActivity : AppCompatActivity() {
         messageRv.layoutManager = layoutManager
         messageRv.adapter = messageRvAdapter
 
+
         searchEdit.setOnEditorActionListener(TextView.OnEditorActionListener { textView, i, keyEvent ->
             if (i == EditorInfo.IME_ACTION_SEND){
                 if (searchEdit.toString().length > 0){
@@ -97,4 +98,5 @@ class MainActivity : AppCompatActivity() {
         })
         queue.add(postRQ)
     }
+
 }
